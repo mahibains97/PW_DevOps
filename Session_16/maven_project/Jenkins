@@ -1,0 +1,36 @@
+// Jenkinsfile
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven 3.8.1' // Name of the Maven tool configured in Jenkins
+        jdk 'JDK 11'        // Name of the JDK configured in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+
+    post {
+        always {
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}
+
