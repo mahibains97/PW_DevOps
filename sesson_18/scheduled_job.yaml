@@ -13,7 +13,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
 
+            - name: Show Current UTC Time
+              run: date -u
 
+            - name: Show Current Local time (IST)
+              run: date -d '+5 hours 30 minutes'
             - name: show current dat and time
               run: date -u
             - name: Show Current Time and Date
