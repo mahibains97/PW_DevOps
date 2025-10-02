@@ -20,6 +20,21 @@ jobs:
           echo "Running scheduled build..."
           cd /mnt/c/Users/dkumar/Documents/gitproject/sample.1/git_branch_merge_demo/git_new_repo/PW_DevOps/sesson_18  # e.g., cd frontend
           # Replace this with your actual build command
-          npm install
-          npm run build
+      - name:  npm install
+        run:   npm run build
+         
+      - name: Install Dependencies
+        run: rm -rf node_modules package-lock.json && npm install
 
+      - name: Run tests
+        run: npm test
+
+      - name: Build React App
+        run: npm run build
+
+      # upload build artifacts
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path: build
