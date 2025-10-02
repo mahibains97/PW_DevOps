@@ -1,0 +1,24 @@
+name: Scheduled Build
+
+on:
+  schedule:
+    # Runs at 3 AM UTC every day
+    - cron: '2 * * * *'
+  # Optional: allows you to run it manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+      - name: Run build
+        run: |
+          echo "Running scheduled build..."
+          cd /mnt/c/Users/dkumar/Documents/gitproject/sample.1/git_branch_merge_demo/git_new_repo/PW_DevOps/sesson_18  # e.g., cd frontend
+          # Replace this with your actual build command
+          npm install
+          npm run build
