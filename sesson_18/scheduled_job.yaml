@@ -1,48 +1,50 @@
 name: Daily Build
 
 on:
-    # schedule:
-    #     - cron: "*/5 * * * *"
-    workflow_dispatch: 
-    push:
-        branches:
-            - main
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  # Uncomment to enable scheduled builds
+   schedule:
+      - cron: "*/5 * * * *"
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
+  build:
+    runs-on: ubuntu-latest
 
-            - name: Show Current UTC Time
-              run: date -u
+    defaults:
+      run:
+        working-directory: ./PW_DevOps/sesson_18  # ✅ Set once for all steps
 
-            - name: Show Current Local time (IST)
-              run: date -d '+5 hours 30 minutes'
-            - name: show current dat and time
-              run: date -u
-            - name: Show Current Time and Date
-              run: date -u
-            - name: Checkout Code
-              uses: actions/checkout@v5
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5
 
-            - name: Set up Node JS
-              uses: actions/setup-node@v5
-              with:
-                node-version: '20.19.0'
-            
-            - name: Install Dependencies
-              run: rm -rf node_modules package-lock.json && npm install
+      - name: Show Current UTC Time
+        run: date -u
 
-            - name: install Dependencies
-            - name: Run tests
-              run: npm test
+      - name: Show Current Local Time (IST)
+        run: date -d '+5 hours 30 minutes'
 
-            - name: Build React App
-              run: npm run build
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20.19.0'
 
-      # upload build artifacts
-            - name: Upload build artifacts
-              uses: actions/upload-artifact@v4
-              with:
-                 name: react-build
-                 path: build
+      - name: Clean and Install Dependencies
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build React App
+        run: npm run build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path: build
