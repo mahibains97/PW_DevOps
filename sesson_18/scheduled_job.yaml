@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./sesson_18  # ✅ FIXED path
+        working-directory: ./PW_DevOps/sesson_18  # ✅ Your real subfolder with package.json
 
     steps:
       - name: Checkout Code
@@ -26,7 +26,7 @@ jobs:
       - name: Show Current Local Time (IST)
         run: date -d '+5 hours 30 minutes'
 
-      - name: List current directory (debug)
+      - name: List current directory (for debugging)
         run: ls -la
 
       - name: Set up Node.js
