@@ -6,8 +6,8 @@ on:
     branches:
       - main
   # Uncomment to enable scheduled builds
-   schedule:
-      - cron: "*/5 * * * *"
+  schedule:
+    - cron: "*/5 * * * *"
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./PW_DevOps/sesson_18  # ✅ Set once for all steps
+        working-directory: ./PW_DevOps/sesson_18
 
     steps:
       - name: Checkout Code
@@ -26,6 +26,9 @@ jobs:
 
       - name: Show Current Local Time (IST)
         run: date -d '+5 hours 30 minutes'
+
+      - name: List current directory (debug step)
+        run: ls -la
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
