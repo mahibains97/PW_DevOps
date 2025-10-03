@@ -14,20 +14,16 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./PW_DevOps/sesson_18  # ✅ Your real subfolder with package.json
+        working-directory: PW_DevOps/sesson_18  # ✅ No ./, no extra PW_DevOps
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
 
-      - name: Show Current UTC Time
-        run: date -u
-
-      - name: Show Current Local Time (IST)
-        run: date -d '+5 hours 30 minutes'
-
-      - name: List current directory (for debugging)
-        run: ls -la
+      - name: Check folder structure
+        run: |
+          echo "PWD: $(pwd)"
+          ls -R
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -36,7 +32,8 @@ jobs:
 
       - name: Clean and Install Dependencies
         run: |
-          rm -rf node_modules package-lock.json && npm install
+          rm -rf node_modules package-lock.json
+          npm install
 
       - name: Run Tests
         run: npm test
