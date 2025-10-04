@@ -6,8 +6,8 @@ name: Scheduled workflow
 
 on:
 
-  schedule:
-    - cron: " */2 * * * *"
+#  schedule:
+ #   - cron: " */2 * * * *"
 
 jobs:
   builds:
